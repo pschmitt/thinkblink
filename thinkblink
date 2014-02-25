@@ -1,0 +1,19 @@
+#!/bin/sh
+
+ITERATIONS=10
+INTERVAL=.3
+
+cd /sys/devices/platform/thinkpad_acpi/leds/tpacpi\:\:power
+
+SAVED_STATE=$(cat brightness)
+
+for ((i=1; i<=$ITERATIONS; i++))
+do
+    echo "0" > brightness
+    sleep $INTERVAL
+    echo "1" > brightness
+    sleep $INTERVAL
+done
+
+echo "$SAVED_STATE" > brightness
+
